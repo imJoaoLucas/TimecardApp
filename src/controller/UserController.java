@@ -12,12 +12,13 @@ public class UserController
       this.view = view;
    }
    
-   public User createUser()
+   public void createUser(Database db)
    {
       String firstName = view.askFirstName();
       String lastName = view.askLastName();
-      int employeNum = Integer.parseInt(view.askEmployeNumber());
-
-      return new User(firstName, lastName, employeNum);
+      
+      User newUser = db.insertUser(firstName, lastName);
+      
+      view.employeCreatedMsg(newUser);
    }
 }

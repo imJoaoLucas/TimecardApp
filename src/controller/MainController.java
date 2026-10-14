@@ -11,6 +11,7 @@ public class MainController
    private CreateUserView createUserView;
    private TimecardController timecardController;
    private UserController userController;
+   private Database db;
    private Scanner scanner = new Scanner(System.in);
    
    public MainController(MainView mainView)
@@ -20,6 +21,7 @@ public class MainController
       this.createUserView = new CreateUserView();
       this.timecardController = new TimecardController(new User("joao"), consoleView);
       this.userController = new UserController(createUserView);
+      this.db = new Database();
    }
    
    public void start()
@@ -35,9 +37,8 @@ public class MainController
                   timecardController.start();
                   break;
                case 2: //Create User
-                  User u2 = userController.createUser();
+                  userController.createUser(db);
                   
-                  System.out.println(u2.getLastName());
                   break;
                case 3:
                   running = false;
